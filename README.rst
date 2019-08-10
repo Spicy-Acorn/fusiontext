@@ -8,7 +8,7 @@ Installation
 ------------
 
 1. Clone or download the repository.
-3. Set the absolute path of the **./Fuses** directory into the Fusion
+2. Set the absolute path of the **./Fuses** directory into the Fusion
    **Fuses:** path mapping.
 
 Contents
