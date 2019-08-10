@@ -1,0 +1,43 @@
+-- ============================================================================
+-- constants
+-- ============================================================================
+FUSE_NAME = "CreateText"
+DATATYPE = "Text"
+
+-- ============================================================================
+-- fuse
+-- ============================================================================
+FuRegisterClass(FUSE_NAME, CT_Tool, {
+    REGID_DataType = DATATYPE,
+    REGID_InputDataType = DATATYPE,
+    REG_NoCommonCtrls = true,
+    REGS_Category = "xmnr0x23\\Text",
+    REGS_Name = FUSE_NAME,
+    REGS_OpDescription = "Creates a string.",
+    REGS_OpIconString = FUSE_NAME
+})
+
+function Create()
+    InText = self:AddInput("Text" , "Text" , {
+        LINKID_DataType = "Text",
+        INPID_InputControl = "TextEditControl",
+        TEC_Lines = 1
+    })
+
+    InImage = self:AddInput("Image" , "Image" , {
+        LINKID_DataType = "Image",
+        INPID_InputControl = "ImageControl",
+        LINK_Visible = false,
+        INP_Required = false
+    })
+
+    OutText = self:AddOutput("Output" , "Output" , {
+        LINKID_DataType = "Text",
+        LINK_Main = 1
+    })
+end
+
+function Process(req)
+    local text = InText:GetValue(req).Value
+    OutText:Set(req, Text(text))
+end

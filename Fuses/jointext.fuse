@@ -1,0 +1,123 @@
+-- ============================================================================
+-- constants
+-- ============================================================================
+FUSE_NAME = "JoinText"
+DATATYPE = "Text"
+MAX_INPUTS = 64
+
+-- ============================================================================
+-- fuse
+-- ============================================================================
+FuRegisterClass(FUSE_NAME, CT_Tool, {
+    REGID_DataType = DATATYPE,
+    REGID_InputDataType = DATATYPE,
+    REG_NoCommonCtrls = true,
+    REGS_Category = "xmnr0x23\\Text",
+    REGS_Name = FUSE_NAME,
+    REGS_OpDescription = "Dynamically joins strings into one.",
+    REGS_OpIconString = FUSE_NAME
+})
+
+function Create()
+    InWhich = self:AddInput("Which", "Which", {
+        LINKID_DataType = "Number",
+        INPID_InputControl = "SliderControl",
+        INP_MinAllowed = 1,
+        INP_MaxAllowed = MAX_INPUTS,
+        INP_MaxScale = 1,
+        INP_Integer = true,
+        IC_Steps = 1.0,
+        IC_Visible = false
+    })
+
+    InText1 = self:AddInput("Text1", "Text1", {
+        LINKID_DataType = "Text",
+        LINK_Main = 1,
+        INP_Required = false
+    })
+
+    InSeparator = self:AddInput("Separator", "Separator", {
+        LINKID_DataType = "Text",
+        INPID_InputControl = "TextEditControl",
+        TEC_Lines = 1
+    })
+
+    OutText = self:AddOutput("Output", "Output", {
+        LINKID_DataType = "Text",
+        LINK_Main = 1
+    })
+end
+
+function OnAddToFlow()
+    -- find highest existing input
+    local highest_input = 1
+
+    -- NOTE: start at 2, inputs 1 always exists
+    for i = 2, MAX_INPUTS do
+        if self:FindInput("Text" .. tostring(i)) ~= nil then
+            highest_input = i
+        end
+    end
+
+    -- add inputs
+    -- NOTE: start at 2, inputs 1 always exists
+    for i = 2, highest_input do
+        self:AddInput("Text" .. i, "Text" .. i, {
+            LINKID_DataType = "Text",
+            LINK_Main = i,
+            INP_Required = false,
+            INP_DoNotifyChanged = true
+        })
+    end
+
+    -- set slider maximum
+    InWhich:SetAttrs({INP_MaxScale = highest_input, INP_MaxAllowed = highest_input})
+end
+
+function OnConnected(inp, old, new)
+    local inp_nr = tonumber(string.match(inp:GetAttr("LINKS_Name"), "Text(%d+)"))
+    local max_nr = tonumber(InWhich:GetAttr("INP_MaxAllowed"))
+
+    if inp_nr then
+        -- add input if maximum inputs is not exceeded and connection is not empty
+        if inp_nr >= max_nr and max_nr < MAX_INPUTS and new ~= nil then
+            -- set slider maximum
+            InWhich:SetAttrs({INP_MaxScale = inp_nr, INP_MaxAllowed = inp_nr})
+
+            -- add extra input
+            self:AddInput("Text" .. (inp_nr + 1), "Text" .. (inp_nr + 1), {
+                LINKID_DataType = "Text",
+                LINK_Main = (inp_nr + 1),
+                INP_Required = false,
+                INP_DoNotifyChanged = true
+            })
+        end
+    end
+end
+
+function Process(req)
+    local text = ""
+    local separator = InSeparator:GetValue(req).Value or ""
+
+    for i = 1, MAX_INPUTS do
+        -- get input from index
+        local input = self:FindInput("Text" .. tostring(i))
+
+        -- get text from input
+        local inp_text = ""
+        if input ~= nil then
+            inp_text = input:GetSource(req.Time, req:GetFlags()).Value
+        end
+
+        -- build joined string
+        if inp_text ~= "" then
+            if i > 1 then
+                text = text .. separator .. inp_text
+            else
+                text = text .. inp_text
+            end
+        end
+    end
+
+    OutText:Set(req, Text(text))
+end
