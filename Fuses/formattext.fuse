@@ -1,0 +1,129 @@
+-- ============================================================================
+-- modules
+-- ============================================================================
+local textutils = self and require("textutils") or nil
+
+-- ============================================================================
+-- constants
+-- ============================================================================
+FUSE_NAME = "FormatText"
+DATATYPE = "Text"
+MAX_INPUTS = 64
+
+-- ============================================================================
+-- fuse
+-- ============================================================================
+FuRegisterClass(FUSE_NAME, CT_Tool, {
+    REGID_DataType = DATATYPE,
+    REGID_InputDataType = DATATYPE,
+    REG_NoCommonCtrls = true,
+    REGS_Category = "xmnr0x23\\Text",
+    REGS_Name = FUSE_NAME,
+    REGS_OpDescription = "Formats a template string with input values.",
+    REGS_OpIconString = FUSE_NAME
+})
+
+function Create()
+    InWhich = self:AddInput("Which", "Which", {
+        LINKID_DataType = "Number",
+        INPID_InputControl = "SliderControl",
+        INP_MinAllowed = 1,
+        INP_MaxAllowed = MAX_INPUTS,
+        INP_MaxScale = 1,
+        INP_Integer = true,
+        IC_Steps = 1.0,
+        IC_Visible = false
+    })
+
+    InText1 = self:AddInput("Text1", "Text1", {
+        LINKID_DataType = "Text",
+        LINK_Main = 1,
+        INP_Required = false
+    })
+
+    InFormat = self:AddInput("Format", "Format", {
+        LINKID_DataType = "Text",
+        INPID_InputControl = "TextEditControl",
+        TEC_Lines = 1
+    })
+
+    OutText = self:AddOutput("Output", "Output", {
+        LINKID_DataType = "Text",
+        LINK_Main = 1
+    })
+end
+
+function OnAddToFlow()
+    -- find highest existing input
+    local highest_input = 0
+
+    for i = 1, MAX_INPUTS do
+        local input = self:FindInput("Text" .. tostring(i))
+
+        if input == nil then
+            break
+        end
+
+        highest_input = i
+    end
+
+    -- add inputs
+    -- NOTE: start at 2, inputs 1 always exists
+    for i = 2, highest_input do
+        self:AddInput("Text" .. i, "Text" .. i, {
+            LINKID_DataType = "Text",
+            LINK_Main = i,
+            INP_Required = false,
+            INP_DoNotifyChanged = true
+        })
+    end
+
+    -- set slider maximum
+    InWhich:SetAttrs({INP_MaxScale = highest_input, INP_MaxAllowed = highest_input})
+end
+
+function OnConnected(inp, old, new)
+    local inp_nr = tonumber(string.match(inp:GetAttr("LINKS_Name"), "Text(%d+)"))
+    local max_nr = tonumber(InWhich:GetAttr("INP_MaxAllowed"))
+
+    if inp_nr then
+        -- add input if maximum inputs is not exceeded and connection is not empty
+        if inp_nr >= max_nr and max_nr < MAX_INPUTS and new ~= nil then
+            -- set slider maximum
+            InWhich:SetAttrs({INP_MaxScale = inp_nr, INP_MaxAllowed = inp_nr})
+
+            -- add extra input
+            self:AddInput("Text" .. (inp_nr + 1), "Text" .. (inp_nr + 1), {
+                LINKID_DataType = "Text",
+                LINK_Main = (inp_nr + 1),
+                INP_Required = false,
+                INP_DoNotifyChanged = true
+            })
+        end
+    end
+end
+
+function Process(req)
+    local format_str = InFormat:GetValue(req).Value or ""
+    local input_count = tonumber(InWhich:GetAttr("INP_MaxAllowed"))
+    local values = {}
+
+    for i = 1, input_count do
+        -- get input from index
+        local input = self:FindInput("Text" .. tostring(i))
+
+        -- get text from input
+        if input ~= nil then
+            local inp_text = input:GetSource(req.Time, req:GetFlags()).Value
+
+            if inp_text == nil then
+                inp_text = ""
+            end
+
+            table.insert(values, inp_text)
+        end
+    end
+
+    local text = textutils.format_text(format_str, values)
+    OutText:Set(req, Text(text))
+end
