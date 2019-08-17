@@ -50,13 +50,16 @@ end
 
 function OnAddToFlow()
     -- find highest existing input
-    local highest_input = 1
+    local highest_input = 0
 
-    -- NOTE: start at 2, inputs 1 always exists
-    for i = 2, MAX_INPUTS do
-        if self:FindInput("Text" .. tostring(i)) ~= nil then
-            highest_input = i
+    for i = 1, MAX_INPUTS do
+        local input = self:FindInput("Text" .. tostring(i))
+
+        if input == nil then
+            break
         end
+
+        highest_input = i
     end
 
     -- add inputs
@@ -96,28 +99,26 @@ function OnConnected(inp, old, new)
 end
 
 function Process(req)
-    local text = ""
     local separator = InSeparator:GetValue(req).Value or ""
+    local input_count = tonumber(InWhich:GetAttr("INP_MaxAllowed"))
+    local values = {}
 
-    for i = 1, MAX_INPUTS do
+    for i = 1, input_count do
         -- get input from index
         local input = self:FindInput("Text" .. tostring(i))
 
         -- get text from input
-        local inp_text = ""
         if input ~= nil then
-            inp_text = input:GetSource(req.Time, req:GetFlags()).Value
-        end
+            local inp_text = input:GetSource(req.Time, req:GetFlags()).Value
 
-        -- build joined string
-        if inp_text ~= "" then
-            if i > 1 then
-                text = text .. separator .. inp_text
-            else
-                text = text .. inp_text
+            if inp_text == nil then
+                inp_text = ""
             end
+
+            table.insert(values, inp_text)
         end
     end
 
+    local text = table.concat(values, separator)
     OutText:Set(req, Text(text))
 end
