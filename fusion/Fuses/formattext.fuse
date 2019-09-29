@@ -47,6 +47,13 @@ function Create()
         TEC_Lines = 1
     })
 
+    self:AddInput("Example: {1}-{2}x{3}", "help1", {
+        LINKID_DataType = "Text",
+        INPID_InputControl = "LabelControl",
+        INP_External = false,
+        INP_Passive = true
+    })
+
     OutText = self:AddOutput("Output", "Output", {
         LINKID_DataType = "Text",
         LINK_Main = 1
