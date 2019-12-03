@@ -12,13 +12,14 @@ FuRegisterClass(FUSE_NAME, CT_Tool, {
     REGID_DataType = DATATYPE,
     REGID_InputDataType = DATATYPE,
     REG_NoCommonCtrls = true,
-    REGS_Category = "xmnr0x23\\Text",
+    REGS_Category = "Vonk\\Text",
     REGS_Name = FUSE_NAME,
     REGS_OpDescription = "Dynamically joins strings into one.",
     REGS_OpIconString = FUSE_NAME
 })
 
 function Create()
+    -- [[ Creates the user interface. ]]
     InWhich = self:AddInput("Which", "Which", {
         LINKID_DataType = "Number",
         INPID_InputControl = "SliderControl",
@@ -49,6 +50,7 @@ function Create()
 end
 
 function OnAddToFlow()
+    --[[ Callback triggered when adding the Fuse to the flow view. ]]
     -- find highest existing input
     local highest_input = 0
 
@@ -78,6 +80,7 @@ function OnAddToFlow()
 end
 
 function OnConnected(inp, old, new)
+    --[[ Callback triggered when connecting a Fuse to the input of this Fuse. ]]
     local inp_nr = tonumber(string.match(inp:GetAttr("LINKS_Name"), "Text(%d+)"))
     local max_nr = tonumber(InWhich:GetAttr("INP_MaxAllowed"))
 
@@ -99,6 +102,7 @@ function OnConnected(inp, old, new)
 end
 
 function Process(req)
+    -- [[ Creates the output. ]]
     local separator = InSeparator:GetValue(req).Value or ""
     local input_count = tonumber(InWhich:GetAttr("INP_MaxAllowed"))
     local values = {}
