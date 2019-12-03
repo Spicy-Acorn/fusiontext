@@ -11,13 +11,14 @@ FuRegisterClass(FUSE_NAME, CT_Tool, {
     REGID_DataType = DATATYPE,
     REGID_InputDataType = DATATYPE,
     REG_NoCommonCtrls = true,
-    REGS_Category = "xmnr0x23\\Text",
+    REGS_Category = "Vonk\\Text",
     REGS_Name = FUSE_NAME,
     REGS_OpDescription = "Creates a string.",
     REGS_OpIconString = FUSE_NAME
 })
 
 function Create()
+    -- [[ Creates the user interface. ]]
     InText = self:AddInput("Text" , "Text" , {
         LINKID_DataType = "Text",
         INPID_InputControl = "TextEditControl",
@@ -38,6 +39,7 @@ function Create()
 end
 
 function Process(req)
+    -- [[ Creates the output. ]]
     local text = InText:GetValue(req).Value
     OutText:Set(req, Text(text))
 end
