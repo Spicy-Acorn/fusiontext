@@ -1,4 +1,9 @@
 -- ============================================================================
+-- modules
+-- ============================================================================
+local textutils = self and require("textutils") or nil
+
+-- ============================================================================
 -- constants
 -- ============================================================================
 FUSE_NAME = "TextCreate"
@@ -34,5 +39,6 @@ end
 function Process(req)
     -- [[ Creates the output. ]]
     local text = InText:GetValue(req).Value
-    OutText:Set(req, Text(text))
+    local fu_text = textutils.to_fusion_text(text)
+    OutText:Set(req, fu_text)
 end
