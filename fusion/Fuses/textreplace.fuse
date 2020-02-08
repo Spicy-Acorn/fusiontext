@@ -1,0 +1,61 @@
+-- ============================================================================
+-- modules
+-- ============================================================================
+local textutils = self and require("textutils") or nil
+
+-- ============================================================================
+-- constants
+-- ============================================================================
+FUSE_NAME = "TextReplace"
+DATATYPE = "Text"
+
+-- ============================================================================
+-- fuse
+-- ============================================================================
+FuRegisterClass(FUSE_NAME, CT_Tool, {
+    REGID_DataType = DATATYPE,
+    REGID_InputDataType = DATATYPE,
+    REG_NoCommonCtrls = true,
+    REGS_Category = "Vonk\\Text",
+    REGS_Name = FUSE_NAME,
+    REGS_OpDescription = "Replaces substrings of a string.",
+    REGS_OpIconString = FUSE_NAME
+})
+
+function Create()
+    -- [[ Creates the user interface. ]]
+    InText = self:AddInput("Text", "Text", {
+        LINKID_DataType = "Text",
+        LINK_Main = 1
+    })
+
+    InPattern = self:AddInput("Pattern", "Pattern", {
+        LINKID_DataType = "Text",
+        INPID_InputControl = "TextEditControl",
+        TEC_Lines = 1,
+        ICD_Width = 1 / 2
+    })
+
+    InReplace = self:AddInput("Replace", "Replace", {
+        LINKID_DataType = "Text",
+        INPID_InputControl = "TextEditControl",
+        TEC_Lines = 1,
+        ICD_Width = 1 / 2
+    })
+
+    OutText = self:AddOutput("Output" , "Output" , {
+        LINKID_DataType = "Text",
+        LINK_Main = 1
+    })
+end
+
+function Process(req)
+    -- [[ Creates the output. ]]
+    local text = InText:GetValue(req).Value
+    local pattern = InPattern:GetValue(req).Value
+    local repl = InReplace:GetValue(req).Value
+
+    local replaced = textutils.replace(text, pattern, repl)
+    local fu_text = textutils.to_fusion_text(replaced)
+    OutText:Set(req, fu_text)
+end

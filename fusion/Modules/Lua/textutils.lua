@@ -96,5 +96,26 @@ function textutils.sub(text, s, e)
     return substring
 end
 
+function textutils.replace(text, pattern, repl)
+    --[[
+        Replaces a substring of a string with given text.
+
+        More info about patterns: http://lua-users.org/wiki/PatternsTutorial
+
+        :param text: Text to replace substring of.
+        :type text: string
+
+        :param pattern: Pattern capturing the substring to replace.
+        :type pattern: string
+
+        :param repl: Text to replace the substring with.
+        :type repl: string
+
+        :rtype: string
+    ]]
+    local replaced = string.gsub(text, pattern, repl)
+    return replaced
+end
+
 -- return module table
 return textutils
