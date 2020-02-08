@@ -49,34 +49,6 @@ function Create()
     })
 end
 
-function safe_cast_string_to_number(str, default)
-    --[[
-        Casts a string to a number, if the string isn't a valid number, return given default.
-
-        :param str: String to cast to number.
-        :type str: string
-
-        :param default: Default number if string cannot be casted.
-        :type default: number
-
-        :rtype: number
-    ]]
-    local num = default
-
-    -- try to cast str to number
-    local result = pcall(tonumber, str)
-    if result then
-        num = tonumber(str)
-    end
-
-    -- fallback to default if tonumber didn't raise an error but returned nil
-    if num == nil then
-        num = default
-    end
-
-    return num
-end
-
 function Process(req)
     -- [[ Creates the output. ]]
     local text = InText:GetValue(req).Value
