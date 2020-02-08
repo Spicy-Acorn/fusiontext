@@ -16,9 +16,9 @@ Contents
 
 **Fuses**
 
-- createtext.fuse: Fuse to create a string.
-- jointext.fuse: Fuse to join strings together into one.
-- formattext.fuse: Fuse to format strings in a template string.
+- textcreate.fuse: Fuse to create a string.
+- textjoin.fuse: Fuse to join strings together into one.
+- textformat.fuse: Fuse to format strings in a template string.
 
 
 **Modules/Lua**
