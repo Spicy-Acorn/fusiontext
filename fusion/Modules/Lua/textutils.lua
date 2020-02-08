@@ -75,5 +75,26 @@ function textutils.len(text)
     return length
 end
 
+function textutils.sub(text, s, e)
+    --[[
+        Returns a substring of a string.
+
+        :param text: String to take substring from.
+        :type text: string
+
+        :param s: Start position of the substring. Defaults to 1.
+        :type s: number
+
+        :param e: End position of the substring. Defaults to -1.
+        :type e: number
+
+        :rtype: string
+    ]]
+    local start_ = s or 1
+    local end_ = e or -1
+    local substring = string.sub(text, start_, end_)
+    return substring
+end
+
 -- return module table
 return textutils
