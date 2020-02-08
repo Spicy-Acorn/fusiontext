@@ -1,6 +1,19 @@
 -- module table
 textutils = {}
 
+function textutils.to_fusion_text(text)
+    --[[
+        Casts a string to a Fusion builtin/supported Text type.
+
+        :param text: Text to cast to Fusion text.
+        :type text: string
+
+        :rtype: Text
+    ]]
+    local fu_text = Text(text)
+    return fu_text
+end
+
 function textutils.format_text(format_str, values)
     --[[
         Formats a template string with values.
