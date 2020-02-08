@@ -25,13 +25,6 @@ function Create()
         TEC_Lines = 1
     })
 
-    InImage = self:AddInput("Image" , "Image" , {
-        LINKID_DataType = "Image",
-        INPID_InputControl = "ImageControl",
-        LINK_Visible = false,
-        INP_Required = false
-    })
-
     OutText = self:AddOutput("Output" , "Output" , {
         LINKID_DataType = "Text",
         LINK_Main = 1
