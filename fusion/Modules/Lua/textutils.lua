@@ -32,5 +32,18 @@ function textutils.format_text(format_str, values)
     return formatted_string
 end
 
+function textutils.len(text)
+    --[[
+        Returns the lenght of a string.
+
+        :param text: Text to get length for.
+        :type text: str
+
+        :rtype: number
+    ]]
+    local length = string.len(text)
+    return length
+end
+
 -- return module table
 return textutils
