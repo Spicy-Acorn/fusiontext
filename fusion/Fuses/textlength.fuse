@@ -1,0 +1,43 @@
+-- ============================================================================
+-- modules
+-- ============================================================================
+local textutils = self and require("textutils") or nil
+
+-- ============================================================================
+-- constants
+-- ============================================================================
+FUSE_NAME = "TextLength"
+DATATYPE = "Text"
+
+-- ============================================================================
+-- fuse
+-- ============================================================================
+FuRegisterClass(FUSE_NAME, CT_Tool, {
+    REGID_DataType = DATATYPE,
+    REGID_InputDataType = DATATYPE,
+    REG_NoCommonCtrls = true,
+    REGS_Category = "Vonk\\Text",
+    REGS_Name = FUSE_NAME,
+    REGS_OpDescription = "Returns the length of a string.",
+    REGS_OpIconString = FUSE_NAME
+})
+
+function Create()
+    -- [[ Creates the user interface. ]]
+    InText = self:AddInput("Text", "Text", {
+        LINKID_DataType = "Text",
+        LINK_Main = 1
+    })
+
+    OutText = self:AddOutput("Output" , "Output" , {
+        LINKID_DataType = "Number",
+        LINK_Main = 1
+    })
+end
+
+function Process(req)
+    -- [[ Creates the output. ]]
+    local text = InText:GetValue(req).Value
+    local length = textutils.len(text)
+    OutText:Set(req, Number(length))
+end
