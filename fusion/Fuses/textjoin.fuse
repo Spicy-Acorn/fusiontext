@@ -128,7 +128,7 @@ function Process(req)
         end
     end
 
-    local text = table.concat(values, separator)
+    local text = textutils.join(values, separator)
     local fu_text = textutils.to_fusion_text(text)
     OutText:Set(req, fu_text)
 end
