@@ -14,6 +14,23 @@ function textutils.to_fusion_text(text)
     return fu_text
 end
 
+function textutils.join(values, separator)
+    --[[
+        Joins an array of text with given separation character.
+
+        :param values: String array to join.
+        :type values: table[string]
+
+        :param separator: Optional separation character, defaults to empty string.
+        :type separator: string
+
+        :rtype: string
+    ]]
+    local sep = separator or ""
+    local joined = table.concat(values, sep)
+    return joined
+end
+
 function textutils.format_text(format_str, values)
     --[[
         Formats a template string with values.
