@@ -136,5 +136,6 @@ function Process(req)
     end
 
     local text = textutils.format_text(format_str, values)
-    OutText:Set(req, Text(text))
+    local fu_text = textutils.to_fusion_text(text)
+    OutText:Set(req, fu_text)
 end
