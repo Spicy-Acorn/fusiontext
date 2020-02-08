@@ -79,13 +79,13 @@ function textutils.sub(text, s, e)
     --[[
         Returns a substring of a string.
 
-        :param text: String to take substring from. Defaults to 1.
+        :param text: String to take substring from.
         :type text: string
 
-        :param s: Start position of the substring. Defaults to -1.
+        :param s: Start position of the substring. Defaults to 1.
         :type s: number
 
-        :param e: End position of the substring.
+        :param e: End position of the substring. Defaults to -1.
         :type e: number
 
         :rtype: string
