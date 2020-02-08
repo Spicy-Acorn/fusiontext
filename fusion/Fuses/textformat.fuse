@@ -6,7 +6,7 @@ local textutils = self and require("textutils") or nil
 -- ============================================================================
 -- constants
 -- ============================================================================
-FUSE_NAME = "FormatText"
+FUSE_NAME = "TextFormat"
 DATATYPE = "Text"
 MAX_INPUTS = 64
 
