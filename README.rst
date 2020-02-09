@@ -20,6 +20,7 @@ Contents
 - textjoin.fuse: Fuse to join strings together into one.
 - textformat.fuse: Fuse to format strings in a template string.
 - textlength.fuse: Fuse to return the length of a string.
+- textlstrip.fuse: Fuse to replace a leading substring of a string.
 - textreplace.fuse: Fuse to replace a substring of a string.
 - textsub.fuse: Fuse to return a substring of a string.
 
