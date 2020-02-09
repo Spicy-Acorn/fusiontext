@@ -29,18 +29,28 @@ function Create()
         LINK_Main = 1
     })
 
-    InStart = self:AddInput("InStart", "InStart", {
+    InStart = self:AddInput("Start", "Start", {
         LINKID_DataType = "Number",
-        INPID_InputControl = "TextEditControl",
+        INPID_InputControl = "SliderControl",
+        INP_Integer = true,
         TEC_Lines = 1,
-        ICD_Width = 0.5
+        ICD_Width = 0.5,
+        INP_MinScale = 1,
+        INP_MaxScale = 100,
+        INP_Default = 1,
+        IC_Steps = 1
     })
 
-    InEnd = self:AddInput("InEnd", "InEnd", {
+    InEnd = self:AddInput("End", "End", {
         LINKID_DataType = "Number",
-        INPID_InputControl = "TextEditControl",
+        INPID_InputControl = "SliderControl",
+        INP_Integer = true,
         TEC_Lines = 1,
-        ICD_Width = 0.5
+        ICD_Width = 0.5,
+        INP_MinScale = -100,
+        INP_MaxScale = -1,
+        INP_Default = -1,
+        IC_Steps = 1
     })
 
     OutText = self:AddOutput("Output" , "Output" , {
@@ -49,44 +59,11 @@ function Create()
     })
 end
 
-function safe_cast_string_to_number(str, default)
-    --[[
-        Casts a string to a number, if the string isn't a valid number, return given default.
-
-        :param str: String to cast to number.
-        :type str: string
-
-        :param default: Default number if string cannot be casted.
-        :type default: number
-
-        :rtype: number
-    ]]
-    local num = default
-
-    -- try to cast str to number
-    local result = pcall(tonumber, str)
-    if result then
-        num = tonumber(str)
-    end
-
-    -- fallback to default if tonumber didn't raise an error but returned nil
-    if num == nil then
-        num = default
-    end
-
-    return num
-end
-
 function Process(req)
     -- [[ Creates the output. ]]
     local text = InText:GetValue(req).Value
-    local s = InStart:GetValue(req).Value
-    local e = InEnd:GetValue(req).Value
-
-    -- safely cast start string to number, default to 1
-    s = safe_cast_string_to_number(s, 1)
-    -- safely cast end string to number, default to -1
-    e = safe_cast_string_to_number(e, -1)
+    local s = InStart:GetValue(req).Value or 1
+    local e = InEnd:GetValue(req).Value or -1
 
     local text = textutils.sub(text, s, e)
     local fu_text = textutils.to_fusion_text(text)
