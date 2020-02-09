@@ -117,5 +117,22 @@ function textutils.replace(text, pattern, repl)
     return replaced
 end
 
+function textutils.lstrip(text, strip)
+    --[[
+        Removes the leading substring of a string.
+
+        :param text: Text to strip from.
+        :type text: string
+
+        :param strip: Substring to strip.
+        :type strip: string
+
+        :rtype: string
+    ]]
+    local pattern = string.format("^%s", strip)
+    local stripped = textutils.replace(text, pattern, "")
+    return stripped
+end
+
 -- return module table
 return textutils
