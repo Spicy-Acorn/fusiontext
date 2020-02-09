@@ -2,7 +2,7 @@ Composition {
 	CurrentTime = 0,
 	RenderRange = { 0, 10 },
 	GlobalRange = { 0, 10 },
-	CurrentID = 259,
+	CurrentID = 314,
 	PlaybackUpdateMode = 0,
 	Version = "Fusion 9.0.2 build 15",
 	SavedOutputs = 0,
@@ -15,21 +15,14 @@ Composition {
 	},
 	Tools = {
 		TextSub1 = Fuse.TextSub {
+			CtrlWZoom = false,
 			Inputs = {
 				Text = Input {
 					SourceOp = "TextCreate3",
 					Source = "Output",
 				},
-				InStart = Input {
-					Value = Text {
-						Value = "4"
-					},
-				},
-				InEnd = Input {
-					Value = Text {
-						Value = "-4"
-					},
-				},
+				Start = Input { Value = 4, },
+				End = Input { Value = -4, },
 			},
 			ViewInfo = OperatorInfo { Pos = { 935, 643.5 } },
 		},
@@ -144,16 +137,11 @@ Composition {
 			},
 			ViewInfo = OperatorInfo { Pos = { 770, 313.5 } },
 		},
-		TextRStrip1 = Fuse.TextRStrip {
-			CtrlWZoom = false,
+		TextCreate4_1 = Fuse.TextCreate {
 			Inputs = {
-				Text = Input {
-					SourceOp = "TextCreate4_1",
-					Source = "Output",
-				},
-				Strip = Input { Value = "_suffix", },
+				Text = Input { Value = "prefix_body_suffix", },
 			},
-			ViewInfo = OperatorInfo { Pos = { 935, 1006.5 } },
+			ViewInfo = OperatorInfo { Pos = { 770, 1006.5 } },
 		},
 		TextCreate1 = Fuse.TextCreate {
 			Inputs = {
@@ -176,12 +164,6 @@ Composition {
 			},
 			ViewInfo = OperatorInfo { Pos = { 935, 445.5 } },
 		},
-		TextCreate4_1 = Fuse.TextCreate {
-			Inputs = {
-				Text = Input { Value = "prefix_body_suffix", },
-			},
-			ViewInfo = OperatorInfo { Pos = { 770, 1006.5 } },
-		},
 		RStrip = Note {
 			NameSet = true,
 			ViewInfo = StickyNoteInfo {
@@ -200,6 +182,17 @@ Composition {
 				},
 			},
 			ViewInfo = OperatorInfo { Pos = { 935, 544.5 } },
+		},
+		TextRStrip1 = Fuse.TextRStrip {
+			CtrlWZoom = false,
+			Inputs = {
+				Text = Input {
+					SourceOp = "TextCreate4_1",
+					Source = "Output",
+				},
+				Strip = Input { Value = "_suffix", },
+			},
+			ViewInfo = OperatorInfo { Pos = { 935, 1006.5 } },
 		},
 		Length = Note {
 			NameSet = true,
@@ -305,7 +298,7 @@ Composition {
 						Direction = "Horizontal",
 						PipeStyle = "Orthogonal",
 						Scale = 1,
-						Offset = { -27, -784 }
+						Offset = { -147, -484 }
 					},
 					Timeline = TimelineView {
 						TreeControlState = {
@@ -393,8 +386,12 @@ Composition {
 		Comp = {
 			Views = {
 				Right = {
+					Viewer = {
+					},
 				},
 				Left = {
+					Viewer = {
+					},
 				},
 				View1 = {
 				},
