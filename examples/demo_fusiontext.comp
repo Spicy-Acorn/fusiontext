@@ -2,7 +2,7 @@ Composition {
 	CurrentTime = 0,
 	RenderRange = { 0, 10 },
 	GlobalRange = { 0, 10 },
-	CurrentID = 204,
+	CurrentID = 259,
 	PlaybackUpdateMode = 0,
 	Version = "Fusion 9.0.2 build 15",
 	SavedOutputs = 0,
@@ -38,6 +38,17 @@ Composition {
 				Text = Input { Value = "foo", },
 			},
 			ViewInfo = OperatorInfo { Pos = { 770, 412.5 } },
+		},
+		TextLStrip1 = Fuse.TextLStrip {
+			CtrlWZoom = false,
+			Inputs = {
+				Text = Input {
+					SourceOp = "TextCreate4",
+					Source = "Output",
+				},
+				Strip = Input { Value = "prefix_", },
+			},
+			ViewInfo = OperatorInfo { Pos = { 935, 907.5 } },
 		},
 		TextCreate3 = Fuse.TextCreate {
 			Inputs = {
@@ -133,6 +144,17 @@ Composition {
 			},
 			ViewInfo = OperatorInfo { Pos = { 770, 313.5 } },
 		},
+		TextRStrip1 = Fuse.TextRStrip {
+			CtrlWZoom = false,
+			Inputs = {
+				Text = Input {
+					SourceOp = "TextCreate4_1",
+					Source = "Output",
+				},
+				Strip = Input { Value = "_suffix", },
+			},
+			ViewInfo = OperatorInfo { Pos = { 935, 1006.5 } },
+		},
 		TextCreate1 = Fuse.TextCreate {
 			Inputs = {
 				Text = Input { Value = "foo", },
@@ -154,6 +176,22 @@ Composition {
 			},
 			ViewInfo = OperatorInfo { Pos = { 935, 445.5 } },
 		},
+		TextCreate4_1 = Fuse.TextCreate {
+			Inputs = {
+				Text = Input { Value = "prefix_body_suffix", },
+			},
+			ViewInfo = OperatorInfo { Pos = { 770, 1006.5 } },
+		},
+		RStrip = Note {
+			NameSet = true,
+			ViewInfo = StickyNoteInfo {
+				Pos = { 770, 973.5 },
+				Flags = {
+					Expanded = true
+				},
+				Size = { 263, 72.3 }
+			},
+		},
 		TextLength1 = Fuse.TextLength {
 			Inputs = {
 				Text = Input {
@@ -162,34 +200,6 @@ Composition {
 				},
 			},
 			ViewInfo = OperatorInfo { Pos = { 935, 544.5 } },
-		},
-		TextCreate1_2 = Fuse.TextCreate {
-			Inputs = {
-				Text = Input { Value = "man", },
-			},
-			ViewInfo = OperatorInfo { Pos = { 770, 280.5 } },
-		},
-		TextCreate1_1 = Fuse.TextCreate {
-			Inputs = {
-				Text = Input { Value = "bar", },
-			},
-			ViewInfo = OperatorInfo { Pos = { 770, 247.5 } },
-		},
-		Join = Note {
-			NameSet = true,
-			ViewInfo = StickyNoteInfo {
-				Pos = { 770, 181.5 },
-				Flags = {
-					Expanded = true
-				},
-				Size = { 262, 170.3 }
-			},
-		},
-		TextCreate2 = Fuse.TextCreate {
-			Inputs = {
-				Text = Input { Value = "meervoudigepersoonlijkheidsstoornis", },
-			},
-			ViewInfo = OperatorInfo { Pos = { 770, 544.5 } },
 		},
 		Length = Note {
 			NameSet = true,
@@ -201,11 +211,43 @@ Composition {
 				Size = { 263, 72.3 }
 			},
 		},
+		TextCreate1_1 = Fuse.TextCreate {
+			Inputs = {
+				Text = Input { Value = "bar", },
+			},
+			ViewInfo = OperatorInfo { Pos = { 770, 247.5 } },
+		},
+		TextCreate2 = Fuse.TextCreate {
+			Inputs = {
+				Text = Input { Value = "meervoudigepersoonlijkheidsstoornis", },
+			},
+			ViewInfo = OperatorInfo { Pos = { 770, 544.5 } },
+		},
 		TextCreate1_1_1 = Fuse.TextCreate {
 			Inputs = {
 				Text = Input { Value = "bar", },
 			},
 			ViewInfo = OperatorInfo { Pos = { 770, 445.5 } },
+		},
+		Join = Note {
+			NameSet = true,
+			ViewInfo = StickyNoteInfo {
+				Pos = { 770, 181.5 },
+				Flags = {
+					Expanded = true
+				},
+				Size = { 262, 170.3 }
+			},
+		},
+		LStrip = Note {
+			NameSet = true,
+			ViewInfo = StickyNoteInfo {
+				Pos = { 770, 874.5 },
+				Flags = {
+					Expanded = true
+				},
+				Size = { 263, 72.3 }
+			},
 		},
 		Substring = Note {
 			NameSet = true,
@@ -217,32 +259,17 @@ Composition {
 				Size = { 263, 72.3 }
 			},
 		},
+		TextCreate1_2 = Fuse.TextCreate {
+			Inputs = {
+				Text = Input { Value = "man", },
+			},
+			ViewInfo = OperatorInfo { Pos = { 770, 280.5 } },
+		},
 		TextCreate4 = Fuse.TextCreate {
 			Inputs = {
 				Text = Input { Value = "prefix_body_suffix", },
 			},
 			ViewInfo = OperatorInfo { Pos = { 770, 907.5 } },
-		},
-		TextLStrip1 = Fuse.TextLStrip {
-			CtrlWZoom = false,
-			Inputs = {
-				Text = Input {
-					SourceOp = "TextCreate4",
-					Source = "Output",
-				},
-				Strip = Input { Value = "prefix_", },
-			},
-			ViewInfo = OperatorInfo { Pos = { 935, 907.5 } },
-		},
-		LStrip = Note {
-			NameSet = true,
-			ViewInfo = StickyNoteInfo {
-				Pos = { 770, 874.5 },
-				Flags = {
-					Expanded = true
-				},
-				Size = { 263, 72.3 }
-			},
 		}
 	},
 	Views = {
@@ -278,7 +305,7 @@ Composition {
 						Direction = "Horizontal",
 						PipeStyle = "Orthogonal",
 						Scale = 1,
-						Offset = { -87, -664 }
+						Offset = { -27, -784 }
 					},
 					Timeline = TimelineView {
 						TreeControlState = {
@@ -341,12 +368,12 @@ Composition {
 				{
 					Rows = 3,
 					RatioX = 0.784326018808777,
-					RatioY = 101,
+					RatioY = 104.142661179698,
 					{
 						Columns = 2,
 						RatioX = 1,
 						RatioY = 0.459197786998617,
-						{ ID = "Left", RatioX = 0.5, RatioY = 105.5, Pop = true },
+						{ ID = "Left", RatioX = 0.5, RatioY = 110.665662650602, Pop = true },
 						{ ID = "Right", RatioX = 0.5, Pop = true },
 						Pop = true
 					},
@@ -366,12 +393,8 @@ Composition {
 		Comp = {
 			Views = {
 				Right = {
-					Viewer = {
-					},
 				},
 				Left = {
-					Viewer = {
-					},
 				},
 				View1 = {
 				},
