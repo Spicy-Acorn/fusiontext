@@ -1,8 +1,8 @@
 FusionText
 ==========
 
-FusionText is a toolkit created by Kristof Indeherberge and Cedric Duriau to
-allow easy node based string operations.
+FusionJSON is a node based string library for Blackmagic Design Fusion created
+by Kristof Indeherberge and Cedric Duriau.
 
 Installation
 ------------
