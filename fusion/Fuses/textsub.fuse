@@ -37,8 +37,7 @@ function Create()
         ICD_Width = 0.5,
         INP_MinScale = 1,
         INP_MaxScale = 100,
-        INP_Default = 1,
-        IC_Steps = 1
+        INP_Default = 1
     })
 
     InEnd = self:AddInput("End", "End", {
