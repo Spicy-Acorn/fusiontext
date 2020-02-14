@@ -2,7 +2,7 @@ Composition {
 	CurrentTime = 0,
 	RenderRange = { 0, 10 },
 	GlobalRange = { 0, 10 },
-	CurrentID = 314,
+	CurrentID = 341,
 	PlaybackUpdateMode = 0,
 	Version = "Fusion 9.0.2 build 15",
 	SavedOutputs = 0,
@@ -15,10 +15,9 @@ Composition {
 	},
 	Tools = {
 		TextSub1 = Fuse.TextSub {
-			CtrlWZoom = false,
 			Inputs = {
 				Text = Input {
-					SourceOp = "TextCreate3",
+					SourceOp = "TypeText3",
 					Source = "Output",
 				},
 				Start = Input { Value = 4, },
@@ -26,40 +25,32 @@ Composition {
 			},
 			ViewInfo = OperatorInfo { Pos = { 935, 643.5 } },
 		},
-		TextCreate1_4 = Fuse.TextCreate {
+		TypeText1_1_1 = Fuse.TypeText {
 			Inputs = {
-				Text = Input { Value = "foo", },
+				Text = Input { Value = "bar", },
 			},
-			ViewInfo = OperatorInfo { Pos = { 770, 412.5 } },
+			ViewInfo = OperatorInfo { Pos = { 770, 445.5 } },
 		},
 		TextLStrip1 = Fuse.TextLStrip {
-			CtrlWZoom = false,
 			Inputs = {
 				Text = Input {
-					SourceOp = "TextCreate4",
+					SourceOp = "TypeText4",
 					Source = "Output",
 				},
 				Strip = Input { Value = "prefix_", },
 			},
 			ViewInfo = OperatorInfo { Pos = { 935, 907.5 } },
 		},
-		TextCreate3 = Fuse.TextCreate {
+		TypeText1_2 = Fuse.TypeText {
 			Inputs = {
-				Text = Input { Value = "foobarmanchu", },
+				Text = Input { Value = "man", },
 			},
-			ViewInfo = OperatorInfo { Pos = { 770, 643.5 } },
-		},
-		TextCreate1_2_1 = Fuse.TextCreate {
-			Inputs = {
-				Text = Input { Value = "foo-bar-man-chu", },
-			},
-			ViewInfo = OperatorInfo { Pos = { 770, 742.5 } },
+			ViewInfo = OperatorInfo { Pos = { 770, 280.5 } },
 		},
 		TextReplace1_1 = Fuse.TextReplace {
-			CtrlWZoom = false,
 			Inputs = {
 				Text = Input {
-					SourceOp = "TextCreate1_2_1",
+					SourceOp = "TypeText1_2_1",
 					Source = "Output",
 				},
 				Pattern = Input { Value = "-man", },
@@ -70,20 +61,20 @@ Composition {
 			Inputs = {
 				Which = Input { Value = 1, },
 				Text1 = Input {
-					SourceOp = "TextCreate1",
+					SourceOp = "TypeText1",
 					Source = "Output",
 				},
 				Separator = Input { Value = "-", },
 				Text2 = Input {
-					SourceOp = "TextCreate1_1",
+					SourceOp = "TypeText1_1",
 					Source = "Output",
 				},
 				Text3 = Input {
-					SourceOp = "TextCreate1_2",
+					SourceOp = "TypeText1_2",
 					Source = "Output",
 				},
 				Text4 = Input {
-					SourceOp = "TextCreate1_3",
+					SourceOp = "TypeText1_3",
 					Source = "Output",
 				},
 			},
@@ -92,7 +83,7 @@ Composition {
 		TextReplace1_2 = Fuse.TextReplace {
 			Inputs = {
 				Text = Input {
-					SourceOp = "TextCreate1_2_1",
+					SourceOp = "TypeText1_2_1",
 					Source = "Output",
 				},
 				Pattern = Input { Value = "(%w+)", },
@@ -123,7 +114,7 @@ Composition {
 		TextReplace1 = Fuse.TextReplace {
 			Inputs = {
 				Text = Input {
-					SourceOp = "TextCreate1_2_1",
+					SourceOp = "TypeText1_2_1",
 					Source = "Output",
 				},
 				Pattern = Input { Value = "-", },
@@ -131,63 +122,58 @@ Composition {
 			},
 			ViewInfo = OperatorInfo { Pos = { 935, 775.5 } },
 		},
-		TextCreate1_3 = Fuse.TextCreate {
-			Inputs = {
-				Text = Input { Value = "chu", },
-			},
-			ViewInfo = OperatorInfo { Pos = { 770, 313.5 } },
-		},
-		TextCreate4_1 = Fuse.TextCreate {
+		TypeText4 = Fuse.TypeText {
 			Inputs = {
 				Text = Input { Value = "prefix_body_suffix", },
 			},
-			ViewInfo = OperatorInfo { Pos = { 770, 1006.5 } },
+			ViewInfo = OperatorInfo { Pos = { 770, 907.5 } },
 		},
-		TextCreate1 = Fuse.TextCreate {
-			Inputs = {
-				Text = Input { Value = "foo", },
-			},
-			ViewInfo = OperatorInfo { Pos = { 770, 214.5 } },
-		},
-		TextFormat1 = Fuse.TextFormat {
-			Inputs = {
-				Which = Input { Value = 1, },
-				Text1 = Input {
-					SourceOp = "TextCreate1_4",
-					Source = "Output",
-				},
-				Format = Input { Value = "prefix_{1}-{2}_suffix", },
-				Text2 = Input {
-					SourceOp = "TextCreate1_1_1",
-					Source = "Output",
-				},
-			},
-			ViewInfo = OperatorInfo { Pos = { 935, 445.5 } },
-		},
-		RStrip = Note {
+		Substring = Note {
 			NameSet = true,
 			ViewInfo = StickyNoteInfo {
-				Pos = { 770, 973.5 },
+				Pos = { 770, 610.5 },
 				Flags = {
 					Expanded = true
 				},
 				Size = { 263, 72.3 }
 			},
 		},
-		TextLength1 = Fuse.TextLength {
+		LStrip = Note {
+			NameSet = true,
+			ViewInfo = StickyNoteInfo {
+				Pos = { 770, 874.5 },
+				Flags = {
+					Expanded = true
+				},
+				Size = { 263, 72.3 }
+			},
+		},
+		TypeText3 = Fuse.TypeText {
 			Inputs = {
-				Text = Input {
-					SourceOp = "TextCreate2",
+				Text = Input { Value = "foobarmanchu", },
+			},
+			ViewInfo = OperatorInfo { Pos = { 770, 643.5 } },
+		},
+		TextFormat1 = Fuse.TextFormat {
+			Inputs = {
+				Which = Input { Value = 1, },
+				Text1 = Input {
+					SourceOp = "TypeText1_4",
+					Source = "Output",
+				},
+				Format = Input { Value = "prefix_{1}-{2}_suffix", },
+				Text2 = Input {
+					SourceOp = "TypeText1_1_1",
 					Source = "Output",
 				},
 			},
-			ViewInfo = OperatorInfo { Pos = { 935, 544.5 } },
+			ViewInfo = OperatorInfo { Pos = { 935, 445.5 } },
 		},
 		TextRStrip1 = Fuse.TextRStrip {
 			CtrlWZoom = false,
 			Inputs = {
 				Text = Input {
-					SourceOp = "TextCreate4_1",
+					SourceOp = "TypeText4_1",
 					Source = "Output",
 				},
 				Strip = Input { Value = "_suffix", },
@@ -204,23 +190,39 @@ Composition {
 				Size = { 263, 72.3 }
 			},
 		},
-		TextCreate1_1 = Fuse.TextCreate {
-			Inputs = {
-				Text = Input { Value = "bar", },
+		RStrip = Note {
+			NameSet = true,
+			ViewInfo = StickyNoteInfo {
+				Pos = { 770, 973.5 },
+				Flags = {
+					Expanded = true
+				},
+				Size = { 263, 72.3 }
 			},
-			ViewInfo = OperatorInfo { Pos = { 770, 247.5 } },
 		},
-		TextCreate2 = Fuse.TextCreate {
+		TypeText2 = Fuse.TypeText {
 			Inputs = {
 				Text = Input { Value = "meervoudigepersoonlijkheidsstoornis", },
 			},
 			ViewInfo = OperatorInfo { Pos = { 770, 544.5 } },
 		},
-		TextCreate1_1_1 = Fuse.TextCreate {
+		TypeText1_1 = Fuse.TypeText {
 			Inputs = {
 				Text = Input { Value = "bar", },
 			},
-			ViewInfo = OperatorInfo { Pos = { 770, 445.5 } },
+			ViewInfo = OperatorInfo { Pos = { 770, 247.5 } },
+		},
+		TypeText1_2_1 = Fuse.TypeText {
+			Inputs = {
+				Text = Input { Value = "foo-bar-man-chu", },
+			},
+			ViewInfo = OperatorInfo { Pos = { 770, 742.5 } },
+		},
+		TypeText1_4 = Fuse.TypeText {
+			Inputs = {
+				Text = Input { Value = "foo", },
+			},
+			ViewInfo = OperatorInfo { Pos = { 770, 412.5 } },
 		},
 		Join = Note {
 			NameSet = true,
@@ -232,37 +234,32 @@ Composition {
 				Size = { 262, 170.3 }
 			},
 		},
-		LStrip = Note {
-			NameSet = true,
-			ViewInfo = StickyNoteInfo {
-				Pos = { 770, 874.5 },
-				Flags = {
-					Expanded = true
-				},
-				Size = { 263, 72.3 }
-			},
-		},
-		Substring = Note {
-			NameSet = true,
-			ViewInfo = StickyNoteInfo {
-				Pos = { 770, 610.5 },
-				Flags = {
-					Expanded = true
-				},
-				Size = { 263, 72.3 }
-			},
-		},
-		TextCreate1_2 = Fuse.TextCreate {
+		TypeText1_3 = Fuse.TypeText {
 			Inputs = {
-				Text = Input { Value = "man", },
+				Text = Input { Value = "chu", },
 			},
-			ViewInfo = OperatorInfo { Pos = { 770, 280.5 } },
+			ViewInfo = OperatorInfo { Pos = { 770, 313.5 } },
 		},
-		TextCreate4 = Fuse.TextCreate {
+		TextLength1 = Fuse.TextLength {
+			Inputs = {
+				Text = Input {
+					SourceOp = "TypeText2",
+					Source = "Output",
+				},
+			},
+			ViewInfo = OperatorInfo { Pos = { 935, 544.5 } },
+		},
+		TypeText1 = Fuse.TypeText {
+			Inputs = {
+				Text = Input { Value = "foo", },
+			},
+			ViewInfo = OperatorInfo { Pos = { 770, 214.5 } },
+		},
+		TypeText4_1 = Fuse.TypeText {
 			Inputs = {
 				Text = Input { Value = "prefix_body_suffix", },
 			},
-			ViewInfo = OperatorInfo { Pos = { 770, 907.5 } },
+			ViewInfo = OperatorInfo { Pos = { 770, 1006.5 } },
 		}
 	},
 	Views = {
@@ -272,8 +269,8 @@ Composition {
 			LayoutPreset = 0,
 			Left = 0,
 			Top = 27,
-			Width = 1600,
-			Height = 731,
+			Width = 1920,
+			Height = 911,
 			Views = ordered() {
 				Main = MultiView {
 					Active = "Flow",
@@ -298,7 +295,7 @@ Composition {
 						Direction = "Horizontal",
 						PipeStyle = "Orthogonal",
 						Scale = 1,
-						Offset = { -147, -484 }
+						Offset = { -147, -664 }
 					},
 					Timeline = TimelineView {
 						TreeControlState = {
@@ -360,17 +357,17 @@ Composition {
 				RatioY = 1,
 				{
 					Rows = 3,
-					RatioX = 0.784326018808777,
-					RatioY = 104.142661179698,
+					RatioX = 0.820365535248042,
+					RatioY = 0.0099009900990099,
 					{
 						Columns = 2,
 						RatioX = 1,
-						RatioY = 0.459197786998617,
-						{ ID = "Left", RatioX = 0.5, RatioY = 110.665662650602, Pop = true },
+						RatioY = 0.467331118493909,
+						{ ID = "Left", RatioX = 0.5, RatioY = 0.00947867298578199, Pop = true },
 						{ ID = "Right", RatioX = 0.5, Pop = true },
 						Pop = true
 					},
-					{ ID = "Main", RatioY = 0.460580912863071, Pop = true },
+					{ ID = "Main", RatioY = 0.46843853820598, Pop = true },
 					{ ID = "Time", SnapY = 56, Flat = true }
 				},
 				{
