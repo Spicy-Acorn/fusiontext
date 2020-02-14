@@ -18,7 +18,7 @@ function textutils.join(values, separator)
     return joined
 end
 
-function textutils.format_text(format_str, values)
+function textutils.format(format_str, values)
     --[[
         Formats a template string with values.
 
