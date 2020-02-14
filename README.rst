@@ -1,7 +1,7 @@
 FusionText
 ==========
 
-FusionJSON is a node based string library for Blackmagic Design Fusion created
+FusionText is a node based string library for Blackmagic Design Fusion created
 by Kristof Indeherberge and Cedric Duriau.
 
 Requirements
