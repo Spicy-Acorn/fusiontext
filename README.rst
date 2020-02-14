@@ -16,7 +16,6 @@ Contents
 
 **Fuses**
 
-- textcreate.fuse: Fuse to create a string.
 - textjoin.fuse: Fuse to join strings together into one.
 - textformat.fuse: Fuse to format strings in a template string.
 - textlength.fuse: Fuse to return the length of a string.
