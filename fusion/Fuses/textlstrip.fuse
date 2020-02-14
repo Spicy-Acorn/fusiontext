@@ -2,6 +2,7 @@
 -- modules
 -- ============================================================================
 local textutils = self and require("textutils") or nil
+local typeutils = self and require("typeutils") or nil
 
 -- ============================================================================
 -- constants
@@ -47,6 +48,6 @@ function Process(req)
     local strip = InStrip:GetValue(req).Value
 
     local stripped = textutils.lstrip(text, strip)
-    local fu_text = textutils.to_fusion_text(stripped)
+    local fu_text = typeutils.to_fusion_text(stripped)
     OutText:Set(req, fu_text)
 end
