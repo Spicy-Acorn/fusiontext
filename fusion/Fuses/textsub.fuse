@@ -2,6 +2,7 @@
 -- modules
 -- ============================================================================
 local textutils = self and require("textutils") or nil
+local typeutils = self and require("typeutils") or nil
 
 -- ============================================================================
 -- constants
@@ -65,6 +66,6 @@ function Process(req)
     local e = InEnd:GetValue(req).Value or -1
 
     local text = textutils.sub(text, s, e)
-    local fu_text = textutils.to_fusion_text(text)
+    local fu_text = typeutils.to_fusion_text(text)
     OutText:Set(req, fu_text)
 end
