@@ -1,0 +1,39 @@
+-- ============================================================================
+-- constants
+-- ============================================================================
+FUSE_NAME = "TextCreate"
+DATATYPE = "Text"
+
+-- ============================================================================
+-- fuse
+-- ============================================================================
+FuRegisterClass(FUSE_NAME, CT_Tool, {
+    REGID_DataType = DATATYPE,
+    REGID_InputDataType = DATATYPE,
+    REG_NoCommonCtrls = true,
+    REGS_Category = "Vonk\\Text",
+    REGS_Name = FUSE_NAME,
+    REGS_OpDescription = "Create a Fusion Text object.",
+    REGS_OpIconString = FUSE_NAME
+})
+
+function Create()
+    -- [[ Creates the user interface. ]]
+    InText = self:AddInput("Text" , "Text" , {
+        LINKID_DataType = "Text",
+        INPID_InputControl = "TextEditControl",
+        TEC_Lines = 1
+    })
+
+    OutText = self:AddOutput("Output" , "Output" , {
+        LINKID_DataType = "Text",
+        LINK_Main = 1
+    })
+end
+
+function Process(req)
+    -- [[ Creates the output. ]]
+    local str = InText:GetValue(req).Value
+    local out = Text(str)
+    OutText:Set(req, out)
+end
