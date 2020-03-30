@@ -7,10 +7,6 @@ FusionText is a node based string library for Blackmagic Design Fusion.
 - Kristof Indeherberge
 - Cédric Duriau
 
-## Requirements
-
-- [FusionTypes](https://github.com/cedricduriau/fusiontypes)
-
 ## Installation
 
 1. Clone or download the repository.
