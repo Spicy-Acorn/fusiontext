@@ -13,7 +13,7 @@ FuRegisterClass(FUSE_NAME, CT_Tool, {
     REG_NoCommonCtrls = true,
     REGS_Category = "Vonk\\Text",
     REGS_Name = FUSE_NAME,
-    REGS_OpDescription = "",
+    REGS_OpDescription = "Time based operation on text.",
     REGS_OpIconString = FUSE_NAME
 })
 
