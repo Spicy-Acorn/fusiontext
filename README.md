@@ -25,6 +25,7 @@ FusionText is a node based string library for Blackmagic Design Fusion.
 - `textreplace.fuse`: Fuse to replace a substring of a string.
 - `textrstrip.fuse`: Fuse to remove a trailing substring of a string.
 - `textsub.fuse`: Fuse to return a substring of a string.
+- `texttimestretch.fuse`: Fuse to execute time based operations on text.
 
 
 **Modules/Lua**

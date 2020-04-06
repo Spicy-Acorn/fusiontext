@@ -1,0 +1,48 @@
+-- ============================================================================
+-- constants
+-- ============================================================================
+FUSE_NAME = "TextTimeStretch"
+DATATYPE = "Text"
+
+-- ============================================================================
+-- fuse
+-- ============================================================================
+FuRegisterClass(FUSE_NAME, CT_Tool, {
+    REGID_DataType = DATATYPE,
+    REGID_InputDataType = DATATYPE,
+    REG_NoCommonCtrls = true,
+    REGS_Category = "Vonk\\Text",
+    REGS_Name = FUSE_NAME,
+    REGS_OpDescription = "Time based operation on text.",
+    REGS_OpIconString = FUSE_NAME
+})
+
+function Create()
+    -- [[ Creates the user interface. ]]
+    InText = self:AddInput("Input" , "Input" , {
+        LINKID_DataType = "Text",
+        INP_SendRequest = false,
+        INP_Required = false,
+        LINK_Main = 1
+    })
+
+    InTime = self:AddInput("Time" , "Time" , {
+        LINKID_DataType = "Number",
+        INPID_InputControl = "ScrewControl",
+        INP_MinScale = -100.0,
+        INP_MaxScale = 100.0,
+        INP_Default = 0.0
+    })
+
+    OutText = self:AddOutput("Output" , "Output" , {
+        LINKID_DataType = "Text",
+        LINK_Main = 1
+    })
+end
+
+function Process(req)
+    -- [[ Creates the output. ]]
+    local t = InTime:GetValue(req).Value
+    local out = InText:GetSource(t, req:GetFlags())
+    OutText:Set(req, out)
+end
