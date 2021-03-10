@@ -138,5 +138,26 @@ function textutils.rstrip(text, strip)
     return stripped
 end
 
+function textutils.split(text, pattern)
+    --[[
+        Removes the trailing substring of a string.
+
+        :param text: Text to strip from.
+        :type text: string
+
+        :param strip: Substring to strip.
+        :type strip: string
+
+        :rtype: string
+    ]]
+    local elements = {}
+    
+    for element in string.gmatch(text, pattern) do
+        table.insert(elements, element)
+    end
+
+    return elements
+end
+
 -- return module table
 return textutils
